@@ -1,6 +1,6 @@
 import torch
 import torchvision
-from dataset import CarvanaDataset
+from Segmentation.dataset import MSDataset
 from torch.utils.data import DataLoader
 
 def save_checkpoint(state, filename="my_checkpoint.pth.tar"):
@@ -17,11 +17,11 @@ def get_loaders(
         batch_size,
         train_transform,
         val_transform,
-        num_workers=4,
+        num_workers=0,
         pin_memory=True,
 ):
 
-    ds = CarvanaDataset(
+    ds = MSDataset(
         image_dir=img_dir,
         mask_dir=mask_dir,
         transform=None,
@@ -29,7 +29,7 @@ def get_loaders(
 
     train_ds, val_ds = torch.utils.data.random_split(ds, [0.8, 0.2])
 
-    ds = CarvanaDataset(
+    ds = MSDataset(
         image_dir=img_dir,
         mask_dir=mask_dir,
         transform=train_transform,

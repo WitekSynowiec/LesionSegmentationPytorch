@@ -112,18 +112,16 @@ class Nifti:
         return True if self.__annotations is not None else False
 
 
-def __test():
+def test():
     import os
 
-    dataset_path = r'/mnt/c/Users/pegaz/Desktop/Praca-Magisterska/dataset/zenodo'
+    dataset_path = input("Input a path to dataset:") or r'/mnt/c/Users/pegaz/Desktop/Praca-Magisterska/dataset/zenodo'
 
     image = Nifti(os.path.join(dataset_path,"shifts_ms_pt1","shifts_ms_pt1","msseg","dev_in","t1","4_T1_isovox.nii"), os.path.join(dataset_path,"shifts_ms_pt1","shifts_ms_pt1","msseg","dev_in","gt","4_gt_isovox.nii"))
 
-    image.preview(slice_number=160, show_data_slice=True, show_annotation_slice=False)
-    print(image.get_size())
-
+    image.preview(slice_number=150, show_data_slice=True, show_annotation_slice=True)
 
 
 if __name__ == "__main__":
-    __test()
+    test()
 #%%

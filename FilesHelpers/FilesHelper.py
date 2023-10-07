@@ -151,6 +151,12 @@ def retrieve_slices():
             nii = Nifti(os.path.join(IMAGES_NIFTI_PATH, image), os.path.join(ANNOTATIONS_NIFTI_PATH,image.replace(".nii", "_mask.nii") ))
             for slice_number in range(nii.get_number_of_slices()):
                 data, annotation = nii.get_slices(slice_number)
+
+                # Adding channel to saved matrix
+                data = np.expand_dims(data, 0)
+                annotation = np.expand_dims(annotation, 0)
+
+                print("Shape of {}. Image: {}, Mask: {}".format(image, data.shape, annotation.shape))
                 new_image_path = os.path.join(IMAGES_PATH, str(i) + '.npy')
                 new_annotation_path = os.path.join(ANNOTATIONS_PATH, str(i) + '_mask' + '.npy')
                 np.save(new_image_path, data)
@@ -171,9 +177,9 @@ def get_slices_num(path):
 
 
 if __name__ == "__main__":
-    # organize_files(ORIGINAL_DATASET_PATH)
-    # empty_dir(IMAGES_NIFTI_PATH, '*.nii.gz')
-    # empty_dir(ANNOTATIONS_NIFTI_PATH, '*.nii.gz')
+    organize_files(ORIGINAL_DATASET_PATH)
+    empty_dir(IMAGES_NIFTI_PATH, '*.nii.gz')
+    empty_dir(ANNOTATIONS_NIFTI_PATH, '*.nii.gz')
     retrieve_slices()
 # %%
 

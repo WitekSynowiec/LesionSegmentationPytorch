@@ -5,7 +5,7 @@ torchaudio
 numpy
 matplotlib
 scipy
-monai
 nibabel
 albumentations
 tqdm
+torchviz
